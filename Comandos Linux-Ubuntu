@@ -1,0 +1,12 @@
+Archivo de comandos para Trabajar en linux ubuntu
+
+********TRABAJANDO CON DISCO DURO ****************
+fdisk - l         * Para ver informacion de los volumenes de la maquina 9discos duros presentes)
+badblocks -svnf /dev/sda     * Para reparar sectores logicos -s (ver), -v (mostrar errores encontrados), -n (reparar moddo no destructivo) y -f (forzar lectura y escritura)
+badblocks -s /dev/sda        * Para hacer solo chequeos de integridad del Disco  (ojo – w: Modo escritura (destructivo)).
+
+***aislar sectores dañados del disco duro********
+Para su uso, al igual que badblocks el disco que vamos a analizar y reparar debe de estar desmontado
+
+sudo fsck -cfvry /dev/sda    *-c. Comprobar bloques,-f. Forzar el chequeo,-v. Despliega más información,-r. Modo interactivo.,-y asume yes de respuesta.
+
