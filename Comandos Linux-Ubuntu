@@ -1,4 +1,14 @@
 Archivo de comandos para Trabajar en linux ubuntu
+************MAS USADOS******************
+ls -l                * listado de los archivos -l. para ver los permisos 
+mkdir -p DIRECTORIO     * Crea directorio -p para 
+rm  -r PARA_BORRAR      * Para borrar -r Borra directorios
+cp -r -a /var/www/dir1 /home/asolano     * copiar archivos -r en forma recursiva copia directorios, -a respeta los permisos 
+mv  ORIGEN DESTINO      * para cambiar nombre o mover archivos o directorios
+shutdown now            * apaga la maquina en el momento
+reboot                   * reinicia el computador
+sudo -s                 * cambia el usuario a Root
+
 
 ********TRABAJANDO CON DISCO DURO ****************
 fdisk - l         * Para ver informacion de los volumenes de la maquina 9discos duros presentes)
@@ -7,6 +17,7 @@ badblocks -s /dev/sda        * Para hacer solo chequeos de integridad del Disco 
 
 ***aislar sectores dañados del disco duro********
 Para su uso, al igual que badblocks el disco que vamos a analizar y reparar debe de estar desmontado
+sudo unmount /dev/sda1       * desmonta el disco duro
 
 sudo fsck -cfvry /dev/sda    *-c. Comprobar bloques,-f. Forzar el chequeo,-v. Despliega más información,-r. Modo interactivo.,-y asume yes de respuesta.
 
@@ -17,3 +28,4 @@ sudo kill -KILL  <nro de proceso>       Luego se puede Matar el Servico o Proces
 sudo apt-get install git-core           Instalar GITUHB Si queremos bajar desde GitHub y asi mismo subir archivos o modificaciones.
 
 
+*********
