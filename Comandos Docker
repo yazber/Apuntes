@@ -1,0 +1,12 @@
+Comandos Principales para Trabajar con Dockers:
+
+Instalar Docker desde un scrip simplificado.
+
+curl -sSL https://get.docker.com/ | sh        *Instalamos el docker el scrip esta en get.docker.com
+
+sudo usermod -aG docker SU_USUARIO            *Da privilegios SU_USUARIO para ejecutar docker como root (sin anteponer SUDO)
+
+fdisk - l         * Para ver informacion de los volumenes de la maquina 9discos duros presentes)
+badblocks -svnf /dev/sda     * Para reparar sectores logicos -s (ver), -v (mostrar errores encontrados), -n (reparar moddo no destructivo) y -f (forzar lectura y escritura)
+
+
