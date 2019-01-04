@@ -10,3 +10,10 @@ Para su uso, al igual que badblocks el disco que vamos a analizar y reparar debe
 
 sudo fsck -cfvry /dev/sda    *-c. Comprobar bloques,-f. Forzar el chequeo,-v. Despliega más información,-r. Modo interactivo.,-y asume yes de respuesta.
 
+*********TRABAJANDO CON SERVICIOS*****************
+pd -ef | grep SERVICIO_QUE_QUIERO       sirve para ver servicios que estan ejecutandose Filtrado por SERVICIO_QUE_QUIERO ver
+sudo kill -KILL  <nro de proceso>       Luego se puede Matar el Servico o Proceso
+
+sudo apt-get install git-core           Instalar GITUHB Si queremos bajar desde GitHub y asi mismo subir archivos o modificaciones.
+
+
