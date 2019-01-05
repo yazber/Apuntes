@@ -1,0 +1,14 @@
+Para Certificados SSL.
+
+https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion
+
+Para Instalar Ngixn como proxy inverso
+
+https://github.com/jwilder/nginx-proxy
+https://hub.docker.com/r/jwilder/nginx-proxy/
+https://github.com/swoldanski/odoo-nginx-docker-multitenant
+https://github.com/apertoso/docker-nginx-le-companion
+
+http://www.odoochile.org/forum/ayuda-1/question/tutorial-nginx-con-odoo-multi-tenant-550
+  https://github.com/bmya/odoo-docker-scripts/tree/8.0
+  http://www.schenkels.nl/2014/12/reverse-proxy-with-odoo-8-nginx-ubuntu-14-04-lts/
