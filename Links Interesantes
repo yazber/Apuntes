@@ -12,3 +12,35 @@ https://github.com/apertoso/docker-nginx-le-companion
 http://www.odoochile.org/forum/ayuda-1/question/tutorial-nginx-con-odoo-multi-tenant-550
   https://github.com/bmya/odoo-docker-scripts/tree/8.0
   http://www.schenkels.nl/2014/12/reverse-proxy-with-odoo-8-nginx-ubuntu-14-04-lts/
+  
+  https://github.com/hotkee/docker-odoo-nginx
+  https://github.com/Ozrlz/odoo-nginx-reverse-proxy
+  
+  https://linuxize.com/post/configure-odoo-with-nginx-as-a-reverse-proxy/
+  
+  https://linuxize.com/post/how-to-setup-automatic-odoo-backup/
+  
+  https://linuxize.com/post/secure-nginx-with-let-s-encrypt-on-ubuntu-16-04/
+  
+  https://linuxize.com/post/how-to-install-nginx-on-ubuntu-16-04/
+  
+  
+  https://www.hostinger.es/tutoriales/iptables-asegurar-ubuntu-vps-linux-firewall/#gref
+  
+  VIDEOS INTERESANTES POR SEGUIR
+  https://www.youtube.com/channel/UCLYNXm3oExJwUnV8eJU7dMQ      DE ODOOERPDEVELOPERS LISTA SOBRE ODOO 11 para desarrollar.
+  https://www.youtube.com/channel/UCt64PVD-20fsa18UY2mjQxg      MOCHILA NEGRA
+  https://odooerpcloud.com/blog/blog-1
+  
+  INSTALAR ODOO 12 DESDE DOCKER
+  https://unkkuri.com/blog/unkkuri-blog-1/post/odoo-12-in-docker-container-25
+  
+  
+  Verifique su directorio odoo y su directorio de almacén de archivos y asegúrese de tener los permisos correctos (755/644).
+  Es un problema de permiso. chown -R odoo /var/lib/odooarreglado el problema! 
+  
+GESTION DE VOLUMENES DOCKER
+https://dockertips.com/volumenes
+http://www.blog.teraswap.com/docker-comando-utiles/
+https://dockertips.com/utilizando-docker-compose
+https://www.muylinux.com/2016/04/19/tutorial-docker/
