@@ -1,0 +1,45 @@
+# Instalar Odoo 12 en ubuntu 18.04 y con postgres 11 todo con docker
+# 1. Instalamos el docker el scrip esta en get.docker.com
+
+curl -sSL https://get.docker.com/ | sh
+
+sudo usermod -aG docker your-user    # Para que docker se ejecute como usuario root (sin anteponer sudo )
+
+#Crear los siguientes directorios, para datos persistentes (Dar permisos de escritura a las carpetas correspondientes)
+al directorio  #sudo chmod 777 addons_ec) 
+sudo  - s                          //para ser usuario root y poder crear directorios
+mkdir -p /opt/database             //carpeta donde se guardara la Base de Datos de Postgres
+mkdir -p /opt/odoo/
+mkdir -p /opt/odoo/DBases          //carpeta donde se guardara Bases de datos de Odoo (filestore,sessions,addons)
+mkdir -p /var/log/postgresql       //carpeta donde se guardara archivos logs de salida de Postgres
+mkdir -p /opt/odoo/conf            //carpeta donde se guardara el archivo de configuracion de Odoo (odoo.conf)
+mkdir -p /opt/odoo/addons_ec       //carpeta donde se guardara los modulos personalizados de Odoo
+chmod -R 766 /opt/odoo/            //Permisos de escritura lectura para propietario-grupo-publico en forma recursiva al directorio y subdirectorios (incluido archivos)
+mkdir -p /opt/nginx                //Para la configuracion de Nginx como Proxy inverso
+
+# para ver si hay algun contenedor docker corriendo ...   docker ps -a  
+# desmontar contenedor corriendo ...    docker rm -f nombre_contenedor
+# --restart="always" es necesario para que inicie el contenedor si apagamos o reiniciamos el servidor
+# -d -e ejecuta un comando --name nombre_contenedor y postgres es la imagen si no hay la baja de internet
+# si quiero accesar al POSTGRES (montado desde docker) con PGAdmin hay que levantar el docker con puerto 5432:
+
+docker run --restart="always" -p 5432:5432 -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo --name db -v /opt/database:/var/lib/postgresql/data -v /opt/log/postgresql:/var/log/postgresql postgres:11
+
+# 3. Creamos el contenedor odoo y le asignamos los puertos de entrada 8069
+# --link establece link con contenedor db (postgres 11)
+
+docker run -d --restart="always" -v /opt/odoo/conf:/etc/odoo -v /opt/odoo/addons_ec:/mnt/extra-addons -v /opt/odoo/DBases:/var/lib/odoo -p 0.0.0.0:8069:8069 --name odoo --link db:db -t veivaa/odoo:12.0
+
+#Copiar odoo.conf para hacer cambios y personalizar (usuario postgres y Password de postgres, y otros más)
+docker cp odoo:/etc/odoo/odoo.conf /opt/odoo/conf/
+
+#Si hay cambios en odoo.conf, para que surtan efecto parar el contenedor y reiniciar con(docker start -a odoo)
+
+docker stop odoo
+
+#    iniciarlo con la opción -a es para hacer seguimiento de procesos
+
+docker start -a odoo
+
+# 5. Iniciamos odoo desde el navegador
+localhost:8069
