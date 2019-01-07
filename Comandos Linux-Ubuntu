@@ -28,4 +28,28 @@ sudo kill -KILL  <nro de proceso>       Luego se puede Matar el Servico o Proces
 sudo apt-get install git-core           Instalar GITUHB Si queremos bajar desde GitHub y asi mismo subir archivos o modificaciones.
 
 
-*********
+*********TRABAJANDO CON PERMISOS, USUARIOS Y ATRIBUTOS DE ARCHIVOS Y CARPETAS
+        ****Cambia atributos de archivos y Carpetas********   -R en forma recursiva 
+        chmod -R 777 /PATH/        -> drwx-rwx-rwx  ->  propietario-grupo-publico  -> 111-111-111
+        chmod -R 542 /PATH/        -> dr-x-r----w-  ->  propietario-grupo-publico  -> 101-100-010
+
+        ****Cambia Propietario, y grupo de archivo y carpetas****** -R en forma recursiva
+        chown (opciones) usuario(:grupo) archivo(s) o directorio(s) Cambiar de propietario archivo o directorio
+        ls -lart Nombre_archivo                  Se ve quien es el propietario actual del archivo o directorio
+        chown root Nombre_archivo                Cambia el propietario para que sea root
+        chown :nuevo_grupo Nombre_archivo	 Cambia el grupo para que sea nuevo_grupo (use ls -l para ver grupo)
+        chown -–from:grupo_actual:nuevo_grupo    Cambia de un grupo a otro
+        chown –reference=arch1 arch2             Copia parametros de arch1, a archiv2
+        ****Cambia seguridades en archivos y carpetas********* -V permite ver la salida, -R recursivamente
+        chattr (operador) (atributo) (archivo)   Operadores(+,-,=)Opciones(-V,-R,-v)
+        lsattr					 Vermite listar atributos de los archivos o carpetas
+        sudo chattr +i arch1			 No se podra borrar arch1 asi sea root
+        sudo chattr -i arch1			 alli si se prodria borrar
+
+
+        ****Comandos para usuarios y grupos********
+        who				ver usuario actual
+        cat /etc/passwd			ver usuarios
+        cat /etc/group			ver grupos
+        finger usuario 			ver info de usuario
+*************
