@@ -7,3 +7,35 @@ curl -sSL https://get.docker.com/ | sh        *Instalamos el docker el scrip est
 
 sudo usermod -aG docker SU_USUARIO            *Da privilegios SU_USUARIO para ejecutar docker como root (sin anteponer SUDO)
 
+docker ps -a                                  *para saber que contenedores se estan ejecutando
+
+********Gestion de Volumenes*********** en “/var/lib/docker/volumes” creará una carpeta para cada contenedor
+
+docker volume create mis_datos              * crea volumen  “/var/lib/docker/volumes/mis_datos/_data”
+docker volume inspect mis_datos             * para ver propiedades del Volumen
+docker volume rm mis_datos                  * Borrar volumen Solo Sí se borro con anterioridad el Contenedor
+docker volume prune                         * Borra los volumenes que no esta siendo usados por contenedores
+
+                          ****Podemos crear un volúmen que sea usado por varios servidores webs mediante el parámetro “service”,
+                          ****solo se pueden montar volúmenes usando la sintaxis “–mount” en lugar del “-v”.
+  docker service create -d --replicas=4 --name web-service --mount source=mis_datos,target=/app ubuntu:17.10
+  docker service ps               *para ver el servicio
+  docker service rm web-service   *Borrar ese servicio
+  docker run -d -it --name ubu1 -v mis_datos:/var/lib/mysql:ro ubuntu:17.10       * Volumen solo de lectura (se agrega :ro)
+  docker run -d -it --name ubu3 --tmpfs /var/html/tempo ubuntu:17.10              *volumen temporal en RAM, se borra al salir de docker --tmpfs
+  
+  
+docker ps                                   * optiene info del contenedor ejemplo id del contenedor: d8e703d7e303
+docker inspect -f  '{{.Id}}' d8e703d7e303   * optiene info volumen ejemplo: d8e703d7e3039a6df6d01bd7fb58d1882e592a85059eb16c4b83cf91847f88e5
+sudo cp file.txt /var/lib/docker/aufs/mnt/**d8e703d7e3039a6df6d01bd7fb58d1882e592a85059eb16c4b83cf91847f88e5**/root/file.txt   * copia dentro de volumen
+docker run -i ubunt_u /bin/bash -c 'cat > file.txt' < file.txt        * otra forma fea pero funciona
+
+docker cp {SOURCE_FILE} {DESTINATION_CONTAINER_ID}:/{DESTINATION_PATH} * forma muy común
+
+****Otra solución es usar scp ****** con Ifconfig se ve el ip del contenedor ******** util si desea copiar directorio.
+scp FILE_PATH_ON_YOUR_HOST IP_CONTAINER:DESTINATION_PATH   *ejemplo: scp -r directory 172.17.0.2:directory
+                                                           * Asegúrese de instalar ssh en su contenedor también.
+                                                           * apt-get install openssh-server
+
+
+
