@@ -9,6 +9,9 @@ shutdown now            * apaga la maquina en el momento
 reboot                   * reinicia el computador
 sudo -s                 * cambia el usuario a Root
 
+********TRABAJANDO CON PUERTOS********************
+netstat -anp --udp --tcp | grep LISTEN  *lista puertos abiertos filtrado por los que estan a la Escucha
+fuser -k 8069/tcp                       *cierra puerto 8069
 
 ********TRABAJANDO CON DISCO DURO ****************
 fdisk - l         * Para ver informacion de los volumenes de la maquina 9discos duros presentes)
