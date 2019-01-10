@@ -1,0 +1,27 @@
+sudo apt update
+sudo apt install nginx
+sudo systemctl status nginx       *Comprueba si se instalo
+
+sudo nginx -v                     *ver la version insalada
+
+sudo ufw allow 'Nginx Full'       *Configura Firewall si esta utilizando ufw usando perfil Nginx Full usa reglas para puertos 80 y 443
+sudo ufw status                   *verifica el estado del firewall
+
+sudo systemctl stop nginx         *Detiene el servicio (start =inicia) (restart=reinicia) (reload=recargar)(disable=desabilita)(enable=habilita)
+
+****Estructura de archivos******
+/etc/nginx/                 Aqui van todos los archivos de configuracion
+/etc/nginx/nginx.conf       Es el principal archivo de configuración
+/etc/nginx/sites-available  Se puede hacer archivos de configuraciónes faciles de mantener para cada dominio, se puede tener para varios servidores
+/etc/nginx/sites-enabled    
+To activate a server block you need to create a symlink (a pointer) from the configuration file sites in a sites-available directory to the sites-enabled directory.
+
+/etc/nginx/sites-available/mydomain.com.conf       *archivo de configuracion para mydomain.com
+/etc/nginx/snippets         *Carpeta que contiene modelos (snippets) de configuracion
+/var/log/nginx/             *archivos log (access.log and error.log) estan aqui, es recomendable tener log por cada servidor
+
+Se puede ubicar documentos del dominio del directorio raiz a cualquier carpeta que se desee. The most common locations for webroot include:
+/home/<user_name>/<site_name>
+/var/www/<site_name>
+/var/www/html/<site_name>
+/opt/<site_name>
