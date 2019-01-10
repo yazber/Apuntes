@@ -9,11 +9,13 @@ curl -sSL https://get.docker.com/ | sh        *Instalamos el docker el scrip est
 
 sudo usermod -aG docker SU_USUARIO            *Da privilegios SU_USUARIO para ejecutar docker como root (sin anteponer SUDO)
 
-docker ps -a                                  *para saber que contenedores se estan ejecutando
+docker info                                   *Información de Imagenes, Contenedores y versiones que estan en nuestra maquina
+docker ps -a                                  *para saber que contenedores se estan ejecutando -a se puede ver el estado del contenedor
 docker search UBUNTU                          *Buscar imagenes UBUNTU en repositorio Git Docker
-docker pull ubuntu:14.04                      *Descarga imagen UBUNTU tag 14.04
+ddocker pull <imagen>:<version>               *Descarga imagen ejemplo UBUNTU:14.04
 docker images                                 * Visualiza imagenes descargadas
-docker run -i -t b72889fa879c /bin/bash       *Ingresa dentro de la imagen para hacer cualquier modificación (b7288...=ID, o por nombre)
+docker run <imagen>:<version>                 * Crea el contenedor atravez de la imagen
+docker run -i -t b72889fa879c /bin/bash       * Ingresa dentro del Contenedor para hacer cualquier modificación (b7288...=ID, o por nombre)
 docker run -u 0 -i -t ubuntu:14.04 /bin/bash  *Es igual al anterior  CON -u 0 puede ejecutar como usuario root dentro del docker
 docker tag b72889fa879c oldlts:latest         * Pone una etiqueta al contenedor para entrar de forma mas organzada
 docker run -i -t oldlts:latest /bin/bash      * Se Ingresa a la misma imagen mediante la Etiqueta asignada en el paso anterior
@@ -21,13 +23,16 @@ docker run -i -t oldlts:latest /bin/bash      * Se Ingresa a la misma imagen med
 exit   ó Ctrl-D                               * Salir del contenedor pero se deja de ejecutar el Contenedor
 Ctrl +P+Q                                     * Sale sin dejar de ejecutar el contenedor
 docker start -a CONTENEDOR                    * Ejecuta contenedor pero se puede ver como actua 
-docker commit ef7e107e0aae new_ubuntu:14.04   * Guardar un contenedor modificado se guarda la imagen nueva
+docker commit <imagen>:<version>              *Guarda Cambios echos al contenedor para que persitan en el mismo
+docker commit ef7e107e0aae new_ubuntu:14.04   *Guardar un contenedor modificado se guarda la imagen nueva
 docker stop CONTENEDOR                        * parar a ejecucion del contenedor
 docker attach CONTENEDOR                      *accede a un contenedor
 docker rm CONTENEDOR                          *Borra un Contenedor (sin que este ejecutandoce)
 docker rmi IMAGEN                             *Borra una Imagen (sin que este siendo usada) otra forma ** docker image rm IMAGEN
+docker rm $(sudo docker ps -a -q)             *Borra cambios o contenedores creados por modificaciones y que no queremos que persistan
 docker exec -i -t CONTENEDOR ls               *Ejecuta ls dentro del contenedor  -u 0 puede ejecutar como usuario root dentro del docker
-
+docker save <imagen>   >  <archivo>.tar       *Graba la Imagen a un archivo .Tar para poder copiarlo a otra maquina
+docker load < <archivo>.tar                   *Permite cargar una imagen desde archivo .tar
 
 ********Gestion de Volumenes*********** en “/var/lib/docker/volumes” creará una carpeta para cada contenedor
 
