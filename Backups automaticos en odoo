@@ -1,0 +1,48 @@
+***https://linuxize.com/post/how-to-setup-automatic-odoo-backup/
+
+***mediante comando en el terminal
+curl -X POST -F 'master_pwd=ADMIN_PASSWORD' -F 'name=DB_NAME' -F 'backup_format=zip' -o /backup_dir/back_up_filename.zip http://localhost:8069/web/database/backup
+
+ó
+
+wget --post-data 'master_pwd=ADMIN_PASSWORD&name=DB_NAME&backup_format=zip' -O /backup_dir/back_up_filename.zip http://localhost:8069/web/database/backup
+
+*****si se quiere sacar backup de forma remota se reemplaza localhost, por la URL a su instancia de Odoo. Se recomienda utilizar HTTPS****
+
+********Configuración automática de copia de seguridad de Odoo********
+**************~ / backup_odoo.sh*******************
+**************************************************
+#!/bin/bash
+
+# vars
+BACKUP_DIR=~/odoo_backups
+ODOO_DATABASE=db1
+ADMIN_PASSWORD=superadmin_passwd
+
+# create a backup directory
+mkdir -p ${BACKUP_DIR}
+
+# create a backup
+curl -X POST \
+    -F "master_pwd=${ADMIN_PASSWORD}" \
+    -F "name=${ODOO_DATABASE}" \
+    -F "backup_format=zip" \
+    -o ${BACKUP_DIR}/${ODOO_DATABASE}.$(date +%F).zip \
+    http://localhost:8069/web/database/backup
+
+
+# delete old backups
+find ${BACKUP_DIR} -type f -mtime +7 -name "${ODOO_DATABASE}.*.zip" -delete
+*****************************************************************************
+sudo chmod +x ~/backup_odoo.sh
+*********************
+*******No se olvide de cambiar el BACKUP_DIR, ODOO_DATABASEy ADMIN_PASSWORD las variables de acuerdo a sus necesidades.
+********El último paso es crear un nuevo trabajo cron que se ejecutará cada día en 01:30 am:
+sudo crontab -e
+**********
+01 30 * * * /home/<yourusername>/backup_odoo.sh
+*********
+*********Restaurar Base de datos desde la linea de comandos
+curl -F 'master_pwd=superadmin_passwd' -F backup_file=@/opt/odoo/odoo_backups/db1.2018-04-14.zip -F 'copy=true' -F 'name=db3' http://localhost:8069/web/database/restore
+*********
+
