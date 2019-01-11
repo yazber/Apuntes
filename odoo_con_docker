@@ -14,7 +14,7 @@ mkdir -p /opt/odoo/DBases          //carpeta donde se guardara Bases de datos de
 mkdir -p /var/log/postgresql       //carpeta donde se guardara archivos logs de salida de Postgres
 mkdir -p /opt/odoo/conf            //carpeta donde se guardara el archivo de configuracion de Odoo (odoo.conf)
 mkdir -p /opt/odoo/addons_ec       //carpeta donde se guardara los modulos personalizados de Odoo
-chmod -R 766 /opt/odoo/            //Permisos de escritura lectura para propietario-grupo-publico en forma recursiva al directorio y subdirectorios (incluido archivos)
+chmod -R 777 /opt/odoo/            //Permisos de escritura lectura para propietario-grupo-publico en forma recursiva al directorio y subdirectorios (incluido archivos)
 mkdir -p /opt/nginx                //Para la configuracion de Nginx como Proxy inverso
 
 # para ver si hay algun contenedor docker corriendo ...   docker ps -a  
