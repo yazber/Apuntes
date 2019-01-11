@@ -1,0 +1,50 @@
+**Instalacion del Firewall UFW para Ubuntu, Facil y descomplicado
+
+***Requisitos Tener usuario Sudo o crear uno siguiendo estos pasos
+
+adduser “usuario”
+usermod -aG sudo “usuario” 
+su – “usuario”
+sudo whoami
+**************************
+sudo apt install ufw              *Instalar UFW si no esta instalado
+sudo ufw status verbose           *comprobar si esta ejecutandose
+sudo ufw enable                   *Activa el servicio  
+sudo ufw app list                 *lista los perfiles de las aplicaciones instaladas
+sudo ufw app info 'Nginx Full'    *Ver mas detalles del perfil de la aplaicacion
+
+************************** Hibilitar IPv6 para Firewall Ubuntu *********************
+**** editamos el archivo y cambiamos IPv6=Yes   y luego reiniciamos el servicio******
+sudo nano /etc/default/ufw
+sudo ufw disable
+sudo ufw enable
+*********************************Modelos para abrir y cerrar Puertos***************************************
+sudo ufw allow ssh          *habilita el acceso por ssh
+sudo ufw allow 242/tcp      *abre el puerto 242 si lo cambiamos al ssh (22) que viene por defecto
+sudo ufw deny ssh/tcp       *Para bloquear el acceso por ssh
+sudo ufw allow http         *habilita puerto por nombre de servicio
+sudo ufw allow 80/tcp       *habilita puerto por número de puerto
+sudo ufw allow 'Apache'     *habilita puerto por perfil de aplicación
+sudo ufw allow 6000:6003/tcp
+sudo ufw allow 6000:6003/udp
+sudo ufw allow from 192.168.0.19
+sudo ufw allow from 192.168.0.19 to any port 22
+sudo ufw allow from 192.168.0.0/24 to any port 22
+sudo ufw allow in on eth3 to any port 22
+sudo ufw deny from 11.12.13.0/24 to any port 80
+sudo ufw deny from 11.12.13.0/24 to any port 443
+***************************Eliminar reglas****************************
+sudo ufw status numbered          *Listo las reglas para optener el id
+sudo ufw delete #                 *elimina la regla (#)
+sudo ufw delete allow 22/tcp
+
+
+
+
+
+
+sudo ufw disable                  *Desabilita el servicio
+sudo ufw default deny incoming    *Regla para negar todas las conexiones entrantes(viene por defecto en esta ruta /etc/default/ufw)
+sudo ufw default allow outgoing   *Regla que permite todas las conexiones salientes al servidor(viene por defecto)
+
+
