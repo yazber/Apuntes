@@ -1,0 +1,31 @@
+**Pasos para administrar un VPS adecuado con todas las seguridades necesarias
+
+1) Establecer seguridades como crear un nuevo usuario con privilegios root
+
+...
+2) Desabilitar el acceso por ssh del usuario root 
+...
+3) Cambiar el puerto de acceso ssh que es por defecto el 22
+...
+4) habilitar el firewall UFW si no lo esta instalado instalarlo..
+
+sudo ufw status             *ve si esta instalado, habilitado, o desabilitado
+sudo ufw allow ssh          *Permite conexion ssh puerto 22 por default
+sudo ufw allow 242/tcp      *Hable el puerto 242/tcp puesto que cambiamos el default de 22 por el 242
+sudo ufw enable             *Habilitamos con las nuevas reglas
+sudo uwf deny 22            *bloquea el puerto 22 que era el default para ssh.
+
+5) Instalar en NGINX 
+
+sudo apt update
+sudo apt install nginx
+sudo systemctl status nginx
+
+6) Instalar certificado automatico SSL seguir instruciiones
+   Seguir Apuntes Nginx SSL Let's Encrypt
+   
+7) Instalar odoo-docker
+   Seguir apuntes odoo_con_docker
+   
+8) Configurar Odoo para Nginx
+   Seguir Apuntes Configurando odoo con Nginx
