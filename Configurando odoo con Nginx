@@ -1,4 +1,4 @@
-PRE-REQUISITOS
+PRE-REQUISITOS   *****https://linuxize.com/post/configure-odoo-with-nginx-as-a-reverse-proxy/****
 * tener instalado Odoo
 * tener nombre de dominio apuntando a VPS de odoo ejemplo odoo.example.com
 * tener Nginx instalado
@@ -6,10 +6,7 @@ PRE-REQUISITOS
 
 ******Crear el siguiente archivo
 sudo nano /etc/nginx/sites-enabled/odoo.example.com
-*****con el siguiente contenido:
-/etc/nginx/sites-enabled/odoo.example.com
-
-*********************************************************
+*********************/etc/nginx/sites-enabled/odoo.example.com************************************
 upstream odoo {
  server 127.0.0.1:8069;
 }
