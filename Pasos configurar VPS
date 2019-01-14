@@ -1,19 +1,28 @@
 **Pasos para administrar un VPS adecuado con todas las seguridades necesarias
 
-1) Establecer seguridades como crear un nuevo usuario con privilegios root
+1) Establecer seguridades 
+   *Cuando se contrata el servicio en el email envian el usurio root y el psswordor, se accesa por shh (putty, ip y puerto 22)
+  
+apt update && upgrade           *Actualizamos el Sistema como buena practica de seguridad
+passwd                          *Cambiamos el password de root  e ingresamos y confirmamos el nuevo password
+adduser New_Usuario             *Crea un Nuevo usurio y dar privilegios de superusurio con sudo visudo ó editando /etc/sudoers
+sudo visudo                     *Editar e ingresar en la lista de usurios root (sudo)  debajo de root insertar New_usuario ALL=(ALL:ALL) ALL
+usermod -a -G sudo New_Usuario  *Para no estar anteponiendo la parabra sudo
+su root                         *Si se requiere Permiso como root para el nuevo usuario
+nano /etc/ssh/sshd_config       *Editamos linea     Port 22 (cambiar 22 por otro puerto ej. 234)
+                                *Editamos linea     PermitRootLogin yes (cambiamos yes por no)    Ctr-O (graba) y CtrlX (Salir)
+/etc/init.d/ssh restart         *Reiniciamos el servicio y reingresamos por Putty con el nuevo puerto, Usuario y Clave 
 
-...
-2) Desabilitar el acceso por ssh del usuario root 
-...
-3) Cambiar el puerto de acceso ssh que es por defecto el 22
-...
-4) habilitar el firewall UFW si no lo esta instalado instalarlo..
+sudo apt-get install fail2ban   *Para evitar el hackeo por fuerza bruta 
+sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.conf.backup     *Copia un respaldo del archivo de configuracion
+nano /etc/fail2ban/jail.conf    *Cambiar parametros como nro de reintentos antes de bloquear
+/etc/init.d/fail2ban restart    *Despues de hacer cambios en jail.conf reiniciar servicio.
 
-sudo ufw status             *ve si esta instalado, habilitado, o desabilitado
-sudo ufw allow ssh          *Permite conexion ssh puerto 22 por default
-sudo ufw allow 242/tcp      *Hable el puerto 242/tcp puesto que cambiamos el default de 22 por el 242
-sudo ufw enable             *Habilitamos con las nuevas reglas
-sudo uwf deny 22            *bloquea el puerto 22 que era el default para ssh.
+sudo ufw status                 *ufw es el FIREWALL facil de manejar el status ve si esta instalado, habilitado, o desabilitado
+sudo ufw allow ssh              *Permite conexion ssh puerto 22 por default
+sudo ufw allow 234/tcp          *Hable el puerto 234/tcp puesto que cambiamos el default de 22 por el 234
+sudo ufw enable                 *Habilitamos con las nuevas reglas
+sudo uwf deny 22                *bloquea el puerto 22 que era el default para ssh.
 
 5) Instalar en NGINX 
 
