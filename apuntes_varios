@@ -1,0 +1,10 @@
+Errores conocidos
+-------------------LINUX--------------
+
+
+PROBLEMA 
+
+sudo: /etc/sudoers es escribible por todos solucionar
+
+SOLUCIÓN
+https://www.enmimaquinafunciona.com/pregunta/27382/sudo-error-es-el-modo-de-0777-debe-ser-0440
